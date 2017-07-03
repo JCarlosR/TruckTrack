@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">TruckTrack</string>
+    <string name="hello_world">Hello World!</string>
+
+    <string name="lat">Latitud</string>
+    <string name="lng">Longitud</string>
+    <string name="startGPS">Iniciar seguimiento GPS</string>
+    <string name="stopGPS">Detener seguimiento GPS</string>
+</resources>
