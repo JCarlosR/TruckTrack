@@ -4,41 +4,56 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     android:gravity="center"
-    tools:context="com.programacionymas.trucktrack.StartActivity">
+    android:orientation="vertical"
+    tools:context="com.programacionymas.trucktrack.ui.StartActivity">
 
     <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
         android:text="@string/app_name"
         android:textSize="35sp"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:textStyle="bold" />
 
     <Button
         android:id="@+id/btnPanic"
+        android:layout_width="155dp"
+        android:layout_height="wrap_content"
+        android:background="@color/dark_red"
         android:text="Botón de pánico"
-        android:textSize="15sp"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+        android:textColor="@color/white"
+        android:textSize="15sp" />
 
-    <TextView android:id="@+id/txtLat"
-        android:textSize="22sp"
+    <TextView
+        android:id="@+id/txtLat"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lat" />
+        android:layout_marginTop="20dp"
+        android:text="@string/lat"
+        android:textSize="24sp" />
 
-    <TextView android:id="@+id/txtLng"
-        android:textSize="22sp"
+    <TextView
+        android:id="@+id/txtLng"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="@string/lng" />
+        android:text="@string/lng"
+        android:textSize="24sp" />
 
-    <ToggleButton android:id="@+id/btnUpdateGPS"
-        android:textSize="22sp"
-        android:layout_width="wrap_content"
+    <ToggleButton
+        android:id="@+id/btnUpdateGPS"
+        android:layout_width="320dp"
         android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:textOff="@string/startGPS"
         android:textOn="@string/stopGPS"
-        android:textOff="@string/startGPS" />
+        android:textSize="22sp" />
 
+    <Button
+        android:id="@+id/btnLogout"
+        android:layout_width="220dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Cerrar sesión"
+        android:textSize="22sp" />
 </LinearLayout>

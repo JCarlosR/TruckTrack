@@ -1,4 +1,4 @@
-package com.programacionymas.trucktrack;
+package com.programacionymas.trucktrack.ui;
 
 import android.Manifest;
 import android.content.IntentSender;
@@ -9,7 +9,6 @@ import android.support.annotation.Nullable;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -27,11 +26,12 @@ import com.google.android.gms.location.LocationServices;
 import com.google.android.gms.location.LocationSettingsRequest;
 import com.google.android.gms.location.LocationSettingsResult;
 import com.google.android.gms.location.LocationSettingsStatusCodes;
+import com.programacionymas.trucktrack.R;
 
 public class StartActivity extends AppCompatActivity implements View.OnClickListener,
         GoogleApiClient.OnConnectionFailedListener, GoogleApiClient.ConnectionCallbacks, LocationListener {
 
-    private static final String TAG = "Test/StartActivity";
+    private static final String TAG = "TestStart";
     
     private TextView txtLat, txtLng;
     private ToggleButton btnUpdateGps;
@@ -80,11 +80,14 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnUpdateGPS:
                 toggleLocationUpdates(btnUpdateGps.isChecked());
                 break;
+            case R.id.btnLogout:
+                finish();
+                break;
         }
     }
 
     private void toggleLocationUpdates(boolean enable) {
-        Log.d(TAG, "The location updates will be set to => " + enable);
+        System.out.println("The location updates will be set to => " + enable);
         if (enable)
             enableLocationUpdates();
         else
@@ -114,26 +117,26 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
                 switch (status.getStatusCode()) {
                     
                     case LocationSettingsStatusCodes.SUCCESS:
-                        Log.i(TAG, "Configuración correcta");
+                        System.out.println("Configuración correcta");
                         startLocationUpdates();
                         break;
                     
                     case LocationSettingsStatusCodes.RESOLUTION_REQUIRED:
                         try {
-                            Log.i(TAG, "Se requiere actuación del usuario");
+                            System.out.println("Se requiere actuación del usuario");
                             status.startResolutionForResult(StartActivity.this, PETICION_CONFIG_UBICACION);
                         } catch (IntentSender.SendIntentException e) {
                             btnUpdateGps.setChecked(false);
-                            Log.i(TAG, "Error al intentar solucionar configuración de ubicación");
+                            System.out.println("Error al intentar solucionar configuración de ubicación");
                         }
 
                         break;
                     case LocationSettingsStatusCodes.SETTINGS_CHANGE_UNAVAILABLE:
-                        Log.i(TAG, "No se puede cumplir la configuración de ubicación necesaria");
+                        System.out.println("No se puede cumplir la configuración de ubicación necesaria");
                         btnUpdateGps.setChecked(false);
                         break;
                     default:
-                        Log.i(TAG, "Código de respuesta desconocido: " + status.getStatusCode());
+                        System.out.println("Código de respuesta desconocido: " + status.getStatusCode());
                         break;
                 }
             }
@@ -153,12 +156,12 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             // Ojo: estamos suponiendo que ya tenemos concedido el permiso.
             // Sería recomendable implementar la posible petición en caso de no tenerlo.
 
-            Log.i(TAG, "Inicio de recepción de ubicaciones");
+            System.out.println("Inicio de recepción de ubicaciones");
 
             LocationServices.FusedLocationApi.requestLocationUpdates(
                     apiClient, locRequest, StartActivity.this);
         } else {
-            Log.i(TAG, "No se pudo iniciar la recepción de ubicaciones");
+            System.out.println("No se pudo iniciar la recepción de ubicaciones");
         }
     }
     
@@ -167,7 +170,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         //Se ha producido un error que no se puede resolver automáticamente
         //y la conexión con los Google Play Services no se ha establecido.
 
-        Log.e(TAG, "Error grave al conectar con Google Play Services");
+        System.out.println("Error grave al conectar con Google Play Services");
     }
 
     @Override
@@ -191,7 +194,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onConnectionSuspended(int i) {
-        Log.e(TAG, "Se ha interrumpido la conexión con Google Play Services");
+        System.out.println("Se ha interrumpido la conexión con Google Play Services");
     }
     
     @Override
@@ -211,7 +214,7 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             } else {
                 // Permission denied
                 // Deberíamos deshabilitar toda la funcionalidad relativa a la localización
-                Log.e(TAG, "Permiso denegado");
+                System.out.println("Permiso denegado");
             }
         }
     }

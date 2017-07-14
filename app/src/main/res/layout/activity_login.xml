@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:gravity="center"
+    android:orientation="vertical"
+    tools:context="com.programacionymas.trucktrack.ui.LoginActivity">
+
+    <TextView
+        android:layout_marginTop="8dp"
+        android:text="Login"
+        android:textSize="42sp"
+        android:gravity="center"
+        android:textStyle="bold"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="18dp"
+        android:text="E-mail"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etEmail"
+        android:textSize="28sp"
+        android:gravity="center"
+        android:hint="Escribe aquí"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <TextView
+        android:layout_marginTop="12dp"
+        android:text="Contraseña"
+        android:textSize="30sp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <EditText
+        android:id="@+id/etPassword"
+        android:gravity="center"
+        android:textSize="28sp"
+        android:hint="Escribe aquí"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+    <Button
+        android:id="@+id/btnLogin"
+        android:layout_marginTop="12dp"
+        android:textSize="30sp"
+        android:text="Ingresar"
+        android:layout_width="350dp"
+        android:layout_height="wrap_content" />
+</LinearLayout>
