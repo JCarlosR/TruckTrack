@@ -50,6 +50,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         Button btnPanic = (Button) findViewById(R.id.btnPanic);
         btnPanic.setOnClickListener(this);
 
+        Button btnLogout = (Button) findViewById(R.id.btnLogout);
+        btnLogout.setOnClickListener(this);
+
         txtLat = (TextView) findViewById(R.id.txtLat);
         txtLng = (TextView) findViewById(R.id.txtLng);
         btnUpdateGps = (ToggleButton) findViewById(R.id.btnUpdateGPS);
