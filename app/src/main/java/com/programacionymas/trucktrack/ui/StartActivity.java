@@ -1,6 +1,7 @@
 package com.programacionymas.trucktrack.ui;
 
 import android.Manifest;
+import android.content.Intent;
 import android.content.IntentSender;
 import android.content.pm.PackageManager;
 import android.location.Location;
@@ -50,6 +51,9 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
         Button btnPanic = (Button) findViewById(R.id.btnPanic);
         btnPanic.setOnClickListener(this);
 
+        Button btnSelectTravel = (Button) findViewById(R.id.btnSelectTravel);
+        btnSelectTravel.setOnClickListener(this);
+
         Button btnLogout = (Button) findViewById(R.id.btnLogout);
         btnLogout.setOnClickListener(this);
 
@@ -80,9 +84,16 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
             case R.id.btnPanic:
                 Toast.makeText(this, "BOOOM", Toast.LENGTH_SHORT).show();
                 break;
+
             case R.id.btnUpdateGPS:
                 toggleLocationUpdates(btnUpdateGps.isChecked());
                 break;
+
+            case R.id.btnSelectTravel:
+                Intent intent = new Intent(this, TravelsActivity.class);
+                startActivity(intent);
+                break;
+
             case R.id.btnLogout:
                 finish();
                 break;

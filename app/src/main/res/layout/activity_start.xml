@@ -49,6 +49,15 @@
         android:textOn="@string/stopGPS"
         android:textSize="22sp" />
 
+
+    <Button
+        android:id="@+id/btnSelectTravel"
+        android:layout_width="290dp"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="24dp"
+        android:text="Seleccionar viaje"
+        android:textSize="22sp" />
+
     <Button
         android:id="@+id/btnLogout"
         android:layout_width="220dp"

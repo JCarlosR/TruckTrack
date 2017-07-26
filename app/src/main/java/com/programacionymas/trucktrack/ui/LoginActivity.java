@@ -8,6 +8,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.programacionymas.trucktrack.Global;
 import com.programacionymas.trucktrack.R;
 import com.programacionymas.trucktrack.io.ApiAdapter;
 import com.programacionymas.trucktrack.io.response.LoginResponse;
@@ -21,6 +22,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     EditText etEmail, etPassword;
     Button btnLogin;
+    LoginActivity loginActivity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -32,6 +34,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
         btnLogin.setOnClickListener(this);
+
+        // self reference
+        loginActivity = this;
+
+        final int userId = Global.getIntFromGlobalPreferences(this, "userId");
+        if (userId > 0) {
+            goToNextActivity();
+        }
+
+        final String lastEmail = Global.getStringFromGlobalPreferences(this, "lastLoggedEmail");
+        etEmail.setText(lastEmail);
     }
 
     @Override
@@ -41,6 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         Call<LoginResponse> call = ApiAdapter.getApiService().getLogin(email, password);
         call.enqueue(this);
+
+        btnLogin.setEnabled(false);
     }
 
     @Override
@@ -51,10 +66,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 final User user = loginResponse.getUser();
                 Toast.makeText(this, "Bienvenido, " + user.getName(), Toast.LENGTH_SHORT).show();
 
+                Global.saveStringGlobalPreference(loginActivity, "lastLoggedEmail", etEmail.getText().toString());
+                Global.saveIntGlobalPreference(loginActivity, "userId", user.getId());
                 goToNextActivity();
             } else {
                 Toast.makeText(this, "Sus datos son incorrectos", Toast.LENGTH_SHORT).show();
             }
+
+            btnLogin.setEnabled(true);
         }
     }
 
@@ -63,10 +82,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         Toast.makeText(this, "No hay conexión a internet", Toast.LENGTH_SHORT).show();
     }
 
-
-    private void goToNextActivity()
-    {
+    private void goToNextActivity() {
         Intent intent = new Intent(this, StartActivity.class);
         startActivity(intent);
     }
+
 }
