@@ -16,14 +16,6 @@
         android:textSize="35sp"
         android:textStyle="bold" />
 
-    <Button
-        android:id="@+id/btnPanic"
-        android:layout_width="155dp"
-        android:layout_height="wrap_content"
-        android:background="@color/dark_red"
-        android:text="Botón de pánico"
-        android:textColor="@color/white"
-        android:textSize="15sp" />
 
     <TextView
         android:id="@+id/txtLat"

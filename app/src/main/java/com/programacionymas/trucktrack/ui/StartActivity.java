@@ -7,6 +7,7 @@ import android.content.pm.PackageManager;
 import android.location.Location;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.StringDef;
 import android.support.v4.app.ActivityCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -37,6 +38,8 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     private TextView txtLat, txtLng;
     private ToggleButton btnUpdateGps;
 
+    private double latitude, longitude;
+
     private static final int PETICION_PERMISO_LOCALIZACION = 101;
     private static final int PETICION_CONFIG_UBICACION = 201;
     private GoogleApiClient apiClient;
@@ -47,9 +50,6 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_start);
-
-        Button btnPanic = (Button) findViewById(R.id.btnPanic);
-        btnPanic.setOnClickListener(this);
 
         Button btnSelectTravel = (Button) findViewById(R.id.btnSelectTravel);
         btnSelectTravel.setOnClickListener(this);
@@ -70,8 +70,11 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
 
     private void updateCoords(Location loc) {
         if (loc != null) {
-            txtLat.setText("Latitud: " + String.valueOf(loc.getLatitude()));
-            txtLng.setText("Longitud: " + String.valueOf(loc.getLongitude()));
+            latitude = loc.getLatitude();
+            longitude = loc.getLongitude();
+
+            txtLat.setText("Latitud: " + latitude);
+            txtLng.setText("Longitud: " + longitude);
         } else {
             txtLat.setText("Latitud: (desconocida)");
             txtLng.setText("Longitud: (desconocida)");
@@ -81,16 +84,17 @@ public class StartActivity extends AppCompatActivity implements View.OnClickList
     @Override
     public void onClick(View view) {
         switch (view.getId()) {
-            case R.id.btnPanic:
-                Toast.makeText(this, "BOOOM", Toast.LENGTH_SHORT).show();
-                break;
-
             case R.id.btnUpdateGPS:
                 toggleLocationUpdates(btnUpdateGps.isChecked());
                 break;
 
             case R.id.btnSelectTravel:
                 Intent intent = new Intent(this, TravelsActivity.class);
+                Bundle b = new Bundle();
+                b.putString("lat", String.valueOf(latitude));
+                b.putString("lng", String.valueOf(longitude));
+
+                intent.putExtras(b);
                 startActivity(intent);
                 break;
 
